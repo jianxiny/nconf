@@ -12,8 +12,11 @@ nnoremap <silent> <Leader>hh :History<CR>
 nnoremap <silent> <Leader>h: :History:<CR>
 nnoremap <silent> <Leader>h/ :History/<CR>
 
+"fold 
+
+
 " hop 
-"
+
 nnoremap <silent> <Leader>tj :HopChar1<CR>
 
 
@@ -33,10 +36,12 @@ inoremap jj .
 inoremap tj :
 inoremap jt _
 
-inoremap mr ""<left>
+inoremap kd ""<left>
+inoremap dk <right>
 
 
 inoremap jf <ESC>
+"inoremap df <ESC>
 inoremap fj <ESC>o
 inoremap ;; <ESC>f)a;
 inoremap ,, <right>,

@@ -29,6 +29,7 @@ set backupdir=~/.local/share/nvim/backup//
 set updatetime=300 " Reduce time for highlighting other references
 set redrawtime=10000 " Allow more time for loading syntax on large files
 set ma
+set foldmethod=manual
 
 set termguicolors
 
@@ -40,7 +41,7 @@ let mapleader = "\<space>"
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
 nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
 nmap <leader>vk :source ~/.config/nvim/plugins/text-expender.vim<cr>
-nmap <leader>k :nohlsearch<CR>
+nmap <leader>k :nohlsearch<CR
 nmap <leader>Q :bufdo bdelete<cr>
 
 " Allow gf to open non-existent files
@@ -65,6 +66,7 @@ vnoremap <leader>p "_dP
 "--------------------------------------------------------------------------
 " Plugins
 "--------------------------------------------------------------------------
+"
 
 " Automatically install vim-plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -75,6 +77,7 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 
+Plug 'ainnhe/everforest'
 Plug 'EdenEast/nightfox.nvim' 
 Plug 'yianwillis/vimcdoc'
 Plug 'mattn/emmet-vim'
@@ -164,7 +167,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { "gopls",  'cssls', 'pyright', "dockerls", "vuels" }
+local servers = { "gopls",  'cssls', 'pyright', "dockerls", "vuels", "html" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -350,7 +353,6 @@ require("gitsigns").setup(
         topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
       },
-​
     }
 )
 
@@ -393,7 +395,7 @@ require('nightfox').setup({
     -- Compiled file's destination location
     compile_path = vim.fn.stdpath("cache") .. "/nightfox",
     compile_file_suffix = "_compiled", -- Compiled file suffix
-    transparent = true,    -- Disable setting background
+    transparent = false,    -- Disable setting background
     terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
     dim_inactive = false,   -- Non focused panes set to alternative background
     styles = {              -- Style to be applied to different syntax groups
@@ -416,22 +418,15 @@ require('nightfox').setup({
   }
 })
 
--- setup must be called before loading
-vim.cmd("colorscheme nightfox")
+-- dark: nightfox, duskfox, nordfox, terafox
+-- light: dayfox, dawnfox,
+vim.cmd("colorscheme dayfox")
 
 
 -- hop 
 require'hop'.setup()
 -- end 
 EOF
-
-
-" telescope
-" Find files using Telescope command-line sugar.
-"nnoremap <leader>ff <cmd>Telescope find_files<cr>
-"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-"nnoremap <leader>fb <cmd>Telescope buffers<cr>
-"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>u :wa<Enter>
 nnoremap <esc><esc> :noh<return><esc>
@@ -444,6 +439,5 @@ nnoremap <leader>dd :bdelete<enter>
 "colorscheme catppuccin 
 
 "hi Normal guibg=NONE ctermbg=NONE
-
 
 source ~/.config/nvim/plugins/text-expender.vim
